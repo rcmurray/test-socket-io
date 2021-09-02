@@ -14,31 +14,39 @@
     <script src="./node_modules/object-hash/dist/object_hash.js"></script>
     <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
     <script>
-      const endpoint = 'https://bazaar.lti.cs.cmu.edu';		
       const transports = ['websocket', 'polling'];
       const token = objectHash(performance.now());
       const path = "/bazsocket/";
+
+	  // Customize the following as appropriate.
+	  // >>> Update ROOMNAME to a unique value for a fresh agent <<<
+      const ENDPOINT = 'https://bazaar.lti.cs.cmu.edu';		      
+      const AGENTNAME = 'climatechange';
+      const CLIENTID = 'ClientServer';
+      const ROOMNAME = 'Room17';
+      const USERID = 1; 
+      const USERNAME = 'Joe';
       
       const auth = {
         token,
         agent: {
-        	name: 'climatechange',
+        	name: AGENTNAME,
         	configuration: {
-        		clientID: 'ClientServer'
+        		clientID: CLIENTID
         	}
         },
         chat: {
-        	id: 'Room16'
+        	id: ROOMNAME
         },
         user: {
-        	id: 1,
-        	name: 'Joe'
+        	id: USERID,
+        	name: USERNAME
         }
       };
       console.log('token', token);
-      console.log('endpoint', endpoint);
+      console.log('endpoint', ENDPOINT);
 
-      const socket = io(endpoint, {
+      const socket = io(ENDPOINT, {
         transports,
         path,
         auth
